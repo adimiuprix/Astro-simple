@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import React, { useState } from 'react';
 
 export default function Greeting({ messages }) {
   const randomMessage = () =>
