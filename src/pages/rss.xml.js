@@ -4,7 +4,7 @@ export async function get() {
   return rss({
     title: 'Astro Learner | Blog',
     description: 'My journey learning Astro',
-    site: 'https://main--gleaming-lebkuchen-43c342.netlify.app/',
+    site: '',
     items: await pagesGlobToRssItems(import.meta.glob('./**/*.md')),
     customData: `<language>en-us</language>`,
   });
