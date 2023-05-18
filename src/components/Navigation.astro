@@ -1,9 +1,9 @@
 ---
+import navData from "../data/navData";
+import Link from "./Link.astro";
 ---
-
-<div class='nav-links'>
-  <a href='/'>Home</a>
-  <a href='/about/'>About</a>
-  <a href='/blog/'>Blog</a>
-  <a href='/tags/'>Tags</a>
-</div>
+{
+  navData.map((item) => (
+    <Link text={item.name} href={item.path} style="primary" isFilled={false} data-navLink />
+  ))
+}

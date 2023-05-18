@@ -1,0 +1,128 @@
+---
+import { Pagination } from "@sarissa/pagination";
+
+const { outerDiv = "flex items-center justify-center",
+    buttonGroup= "",
+  button= "relative flex-nowrap inline-flex items-center px-4 py-2 border text-sm font-medium",
+  activeButton= "bg-sky-500 text-white",
+  disabledButton= "disabled:opacity-75",
+  currentPage, totalPage, url } = Astro.props as Props;
+
+
+let pageStatuses =Array.from({ length: totalPage }, (v, i) => i + 1).map(i=>{
+  var item ={
+	pageNumber : i,
+  isActive : currentPage == i,
+  isDisabled : isDisabled(i)};
+  return item;
+});
+
+function isDisabled(i){
+  if(totalPage<=6) return false;
+  if(i<=2 || i>= totalPage-1) return false;
+  if(currentPage==i-1||currentPage==i||currentPage==i+1)return false;
+  return true;
+}
+const totalPage = 10;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome to Astro</title>
+    <style is:global>
+      .activeButton {
+        --tw-bg-opacity: 1;
+        background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+        color: wheat;
+      }
+    </style>
+  </head>
+
+  <body class="flex flex-col justify-center gap-3 bg-inherit">
+    <h2 class="text-center text-4xl font-bold">Welcome to Sarissa Paging</h2>
+    <h2 class="text-center text-2xl font-bold">Default Style</h2>
+    <p class="text-center">Only 2 items begining and end shown</p>
+    <Pagination currentPage="1" {totalPage} url="posts" />
+    <p class="text-center">
+      Keep 2 items begining and end, also add new items (3,4)
+    </p>
+    <Pagination currentPage="3" {totalPage} url="posts" />
+    <p class="text-center">
+      Keep 2 items begining and end, also add current page, previous and after
+      current page (4,5,6)
+    </p>
+    <Pagination currentPage="5" {totalPage} url="posts" />
+    <p class="text-center">
+      Keep 2 items begining and end, also add current page, previous and after
+      current page (6,7,8)
+    </p>
+    <Pagination currentPage="7" {totalPage} url="posts" />
+    <p class="text-center">
+      Keep 2 items begining and end, also add previous page (8)
+    </p>
+    <Pagination currentPage="9" {totalPage} url="posts" />
+
+    <h2 class="text-center text-2xl font-bold">Custom Style</h2>
+    <p class="text-center">Only 2 items begining and end shown</p>
+    <Pagination
+      currentPage="1"
+      {totalPage}
+      url="posts"
+      activeButton="activeButton"
+    />
+    <p class="text-center">
+      Keep 2 items begining and end, also add new items (3,4)
+    </p>
+    <Pagination
+      currentPage="3"
+      {totalPage}
+      url="posts"
+      activeButton="activeButton"
+    />
+    <p class="text-center">
+      Keep 2 items begining and end, also add current page, previous and after
+      current page (4,5,6)
+    </p>
+    <Pagination
+      currentPage="5"
+      {totalPage}
+      url="posts"
+      activeButton="activeButton"
+    />
+    <p class="text-center">
+      Keep 2 items begining and end, also add current page, previous and after
+      current page (6,7,8)
+    </p>
+    <Pagination
+      currentPage="7"
+      {totalPage}
+      url="posts"
+      activeButton="activeButton"
+    />
+    <p class="text-center">
+      Keep 2 items begining and end, also add previous page (8)
+    </p>
+    <Pagination
+      currentPage="9"
+      {totalPage}
+      url="posts"
+      activeButton="activeButton"
+    />
+
+	<!-- This hiddens added for testing demo -->
+    <div class="flex items-center justify-center hidden">
+      <div class="">
+        <a
+          class="relative flex-nowrap inline-flex items-center px-4 py-2 border text-sm font-medium bg-sky-500 text-white"
+          >1</a
+        >
+        <a
+          class="relative flex-nowrap inline-flex items-center px-4 py-2 border text-sm font-medium activeButton"
+          >1</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
